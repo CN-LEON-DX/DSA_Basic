@@ -1,0 +1,29 @@
+
+Danh sach hoa don hien co la: 
+                     HOA DON THANH TOAN DICH VU           
+         Ngày 12-10-2023              Mã hóa đơn: HD001
+-----------------------------------------------------------------------------------
+Ten               :Nguyen Khac Chinh           Ngay den:20-08-2023
+Dia chi           :245 Dinh Cong, Ha Noi       Ngay di:11-10-2023
+So dien thoai     :0338841974                  So dem :51
+Ma so thue        :VCB2023                     Thu ngan: Quan tri
+Phong             :H001                        Thanh toan: Chua thanh toan 
+-----------------------------------------------------------------------------------
+Ngay                    Chi Tiet            So tien 
+2-03-2023               Matxa             200000
+Tong thanh toan: 200000
+-----------------------------------------------------------------------------------
+                     HOA DON THANH TOAN DICH VU           
+         Ngày 12-10-2023              Mã hóa đơn: HD002 
+-----------------------------------------------------------------------------------
+Ten               :Pham Quang Dai           Ngay den:21-07-2023
+Dia chi           :245 Ba Dinh, Ha Noi       Ngay di:11-10-2023
+So dien thoai     :0943495642                  So dem :80
+Ma so thue        :VCB2023                     Thu ngan: Quan tri
+Phong             :H001                        Thanh toan: Chua thanh toan 
+-----------------------------------------------------------------------------------
+Ngay                    Chi Tiet            So tien 
+2-03-2023               Matxa             200000
+2-05-2023               Matxa             200000
+Tong thanh toan: 400000
+-----------------------------------------------------------------------------------
