@@ -7,7 +7,6 @@ using namespace std;
 // Nhân viên gồm các thông tin tên, dia chi, so dien thoai, cccd, he so luong, ch?c v? (Qu?n lý, thu ngân, …). 
 // Khi khách hàng d?t phòng có th? d?t thêm các D?ch v? khác nhu gi?t ?i, minbar, .. v?i các thông tin liên quan nhu ngày d?t, s? lu?ng d?ch v? d?t, giá ti?n c?a d?ch v? dó.
 // Hóa don thanh toán d?ch v? s? bao g?m các thông tin nhu: Mã hóa don, ngày thanh toán , thông tin c?a khách hàng, thông tin d?ch v? khách hàng dã s? d?ng(Ngày, Chi Ti?t, T?ng S? Ti?n). Trong dó T?ng s? ti?n = T?ng d?ch v? * giá d?ch v?.
-// o
 // KhachHang
 struct KhachHang{
     string sTenKH, sMaKH, sDiaChi, sSoDT, sNgayDen, sNgayDi;
@@ -113,7 +112,6 @@ bool checkExists_KH(List Q, string sMaKH){
 }
 // Tinh so dem khach hang o ?
 int soDem_KH(string sNgayDen, string sNgayDi){
-    int soDem = 0;
     // 21-07-2023
     // 11-10-2023
     // Chưa xây dựng đc
@@ -425,6 +423,7 @@ void HienDS_DSHD(List Q){
         hienHoaDon(p->hd);
         p = p->next;
     }
+    cout << "------------------------------------" << endl;
 }
 // Xóa mot phan tu trong danh sách sau khi tìm du?c p;
 void DeleteNode(Node* p, List &Q){
@@ -487,12 +486,42 @@ void sapXep_DSHD_MaHD(List &Q){
     }
     cout << "Danh sach da xap xep thanh cong !\n";
 }
+void sapXep_DSHD_NgayLapHD(List &Q){
+    for (auto i = Q.head;i!= Q.tail;i = i->next){
+        for (auto j=i->next;j!=NULL;j = j->next){
+            if (i->hd.sNgayLapHD > j->hd.sNgayLapHD){
+                swap(i->hd, j->hd);
+            }
+        }
+    }
+    cout << "Danh sach da xap xep thanh cong !\n";
+}
+void sapXep_DSHD_TenKH(List &Q){
+    for (auto i = Q.head;i!= Q.tail;i = i->next){
+        for (auto j=i->next;j!=NULL;j = j->next){
+            if (i->hd.kh.sTenKH > j->hd.kh.sTenKH){
+                swap(i->hd, j->hd);
+            }
+        }
+    }
+    cout << "Danh sach da xap xep thanh cong !\n";
+}
+void sapXep_DSHD_TongTien(List &Q){
+    for (auto i = Q.head;i!= Q.tail;i = i->next){
+        for (auto j=i->next;j!=NULL;j = j->next){
+            if (tongTien_DV(i->hd.dv) > tongTien_DV(j->hd.dv)){
+                swap(i->hd, j->hd);
+            }
+        }
+    }
+    cout << "Danh sach da xap xep thanh cong !\n";
+}
 
 // Doc file DSHD.txt de nhan vao cac thong tin cua danh sach !
 void readFile_AddHD(List &Q){
     ifstream readfile;
     string empty_line;
-    readfile.open("D:/DSA2023-1/Input_DSHD.txt", ios::in | ios::out);
+    readfile.open("D:/DSA2023-1/BTL/Input_DSHD.txt", ios::in | ios::out);
     if (readfile.fail()){
         cout << "Khong the mo file !\n";
         return;
@@ -556,9 +585,9 @@ void readFile_AddHD(List &Q){
     readfile.clear();
 }
 // In danh sach cac hoa don theo file danh sach !
-void writeFile_DSHD(List &Q){
+void writeFile_DSHD(List Q){
     ofstream writefile;
-    writefile.open("D:/DSA2023-1/Output_DSHD.txt", ios::out | ios::app);
+    writefile.open("D:/DSA2023-1/BTL/Output_DSHD.txt", ios::out | ios::app | ios::binary);
     if (writefile.fail()){
         cout << "Khong the mo file !\n";
         return;
@@ -567,34 +596,6 @@ void writeFile_DSHD(List &Q){
             cout<<"Bat dau ghi file !\n";
             writefile << "Danh sach hoa don hien co la: \n";
             for (auto p = Q.head;p!=NULL;p = p->next){
-                // writefile << "Ma hoa don: " << p->hd.sMaHD << endl;
-                // writefile << "Ngay lap hoa don: " << p->hd.sNgayLapHD << endl;
-                // writefile << "Thong tin khach hang: " << endl;
-                // writefile << "Ma khach hang: " << p->hd.kh.sMaKH << endl;
-                // writefile << "Ten khach hang: " << p->hd.kh.sTenKH << endl;
-                // writefile << "Dia chi: " << p->hd.kh.sDiaChi << endl;
-                // writefile << "So dien thoai: " << p->hd.kh.sSoDT << endl;
-                // writefile << "---Thong tin phong---" << endl;
-                // for (Phong x : p->hd.ph){
-                //     writefile << "Ma phong: " << x.sMaPH << endl;
-                //     writefile << "Ten phong: " << x.sTenPhong << endl;
-                //     writefile << "Day phong: " << x.sDayPhong << endl;
-                //     writefile << "Chi tiet: " << x.sChiTietThem << endl;
-                // }
-                // writefile << "---Thong tin nhan vien---" << endl;
-                // writefile << "Ma nhan vien: " << p->hd.nv.sMaNV << endl;
-                // writefile << "Ten nhan vien: " << p->hd.nv.sTenNV << endl;
-                // writefile << "Dia chi: " << p->hd.nv.sDiaChi << endl;
-                // writefile << "So dien thoai: " << p->hd.nv.sSoDT << endl;
-                // writefile << "CCCD: " << p->hd.nv.sCCCD << endl;
-                // writefile << "Chuc vu: " << p->hd.nv.sChucVu << endl;
-                // writefile << "He so luong: " << p->hd.nv.fHSL << endl;
-                // writefile << "---Thong tin dich vu---" << endl;
-                // for (DichVu x : p->hd.dv){
-                //     writefile << "Ma dich vu: "<< x.sMaDV << endl;
-                //     writefile << "Ten dich vu: "<< x.sTenDV << endl;
-                //     writefile << "Gia dich vu: "<< x.fGiaDV << endl;
-                // }
                 writefile << setw(20) << "                     HOA DON THANH TOAN DICH VU           " << endl;
                 writefile << setw(15) << "Ngày " << p->hd.sNgayLapHD << setw(30) << "Mã hóa đơn: " << p->hd.sMaHD << endl;
                 writefile << "-----------------------------------------------------------------------------------\n";
@@ -620,8 +621,111 @@ void writeFile_DSHD(List &Q){
     writefile.close();
     writefile.clear();
 }
-
-
+void writeFile_DSKhachHang(List Q){
+    ofstream writefile;
+    writefile.open("D:/DSA2023-1/BTL/Output_KhachHang.txt", ios::out | ios::app);
+    if (writefile.fail()){
+        cout << "Khong the mo file !\n";
+        return;
+    }else {
+        try{
+            cout<<"Bat dau ghi file !\n";
+            writefile << "Danh sach khach hang hien co la: \n";
+            for (auto p = Q.head;p!=NULL;p = p->next){
+                writefile << "-----------------------------------------------------------------------------------\n";
+                writefile << setw(10) << "Ten               :" << p->hd.kh.sTenKH << setw(20) << "Ngay den:" << p->hd.kh.sNgayDen << endl;
+                writefile << setw(10) << "Dia chi           :" << p->hd.kh.sDiaChi << setw(15) << "Ngay di:" << p->hd.kh.sNgayDi << endl;
+                writefile << setw(10) << "So dien thoai     :" << p->hd.kh.sSoDT << setw(26) << "So dem :" << soDem_KH(p->hd.kh.sNgayDen, p->hd.kh.sNgayDi) << endl;
+                writefile << "-----------------------------------------------------------------------------------\n";
+            }
+            cout << "Ghi file thanh cong !\n";
+        } catch (exception e){
+            cout << e.what() << endl;
+            cout << "Loi ghi file !\n";
+        }
+    }
+    writefile.close();
+    writefile.clear();
+}
+void writeFile_DSNhanVien(List Q){
+    ofstream writefile;
+    writefile.open("D:/DSA2023-1/BTL/Output_NhanVien.txt", ios::out | ios::app);
+    if (writefile.fail()){
+        cout << "Khong the mo file !\n";
+        return;
+    }else {
+        try{
+            cout<<"Bat dau ghi file !\n";
+            writefile << "Danh sach nhan vien hien co la: \n";
+            for (auto p = Q.head;p!=NULL;p = p->next){
+                writefile << "-----------------------------------------------------------------------------------\n";
+                writefile << setw(10) << "Ma nhan vien      :" << p->hd.nv.sMaNV << setw(20) << "Ten nhan vien:" << p->hd.nv.sTenNV << endl;
+                writefile << setw(10) << "Dia chi           :" << p->hd.nv.sDiaChi << setw(15) << "So dien thoai:" << p->hd.nv.sSoDT << endl;
+                writefile << setw(10) << "CCCD              :" << p->hd.nv.sCCCD << setw(26) << "Chuc vu :" << p->hd.nv.sChucVu << endl;
+                writefile << setw(10) << "He so luong       :" << p->hd.nv.fHSL << endl;
+                writefile << "-----------------------------------------------------------------------------------\n";
+            }
+            cout << "Ghi file thanh cong !\n";
+        } catch (exception e){
+            cout << e.what() << endl;
+            cout << "Loi ghi file !\n";
+        }
+    }
+    writefile.close();
+    writefile.clear();
+}
+void writeFile_DSPhong(List Q){
+    ofstream writefile;
+    writefile.open("D:/DSA2023-1/BTL/Output_Phong.txt", ios::out | ios::app);
+    if (writefile.fail()){
+        cout << "Khong the mo file !\n";
+        return;
+    }else {
+        try{
+            cout<<"Bat dau ghi file !\n";
+            writefile << "Danh sach phong hien co la: \n";
+            for (auto p = Q.head;p!=NULL;p = p->next){
+                writefile << "-----------------------------------------------------------------------------------\n";
+                writefile << setw(10) << "Ma phong          :" << p->hd.ph[0].sMaPH << setw(20) << "Ten phong:" << p->hd.ph[0].sTenPhong << endl;
+                writefile << setw(10) << "Day phong         :" << p->hd.ph[0].sDayPhong << setw(15) << "Chi tiet them:" << p->hd.ph[0].sChiTietThem << endl;
+                writefile << "-----------------------------------------------------------------------------------\n";
+            }
+            cout << "Ghi file thanh cong !\n";
+        } catch (exception e){
+            cout << e.what() << endl;
+            cout << "Loi ghi file !\n";
+        }
+    }
+    writefile.close();
+    writefile.clear();
+}
+void writeFile_DSDichVu(List Q){
+    ofstream writefile;
+    writefile.open("D:/DSA2023-1/BTL/Output_DichVu.txt", ios::out | ios::app);
+    if (writefile.fail()){
+        cout << "Khong the mo file !\n";
+        return;
+    }else {
+        try{
+            cout<<"Bat dau ghi file !\n";
+            writefile << "Danh sach dich vu hien co la: \n";
+            for (auto p = Q.head;p!=NULL;p = p->next){
+                writefile << "-----------------------------------------------------------------------------------\n";
+                for (DichVu x : p->hd.dv){
+                    writefile << setw(10) << "Ma dich vu        :" << x.sMaDV << setw(20) << "Ten dich vu:" << x.sTenDV << endl;
+                    writefile << setw(10) << "Gia dich vu       :" << x.fGiaDV << setw(15) << "Ngay su dung:" << x.sNgaySDDV << endl;
+                }
+                writefile << "-----------------------------------------------------------------------------------\n";
+            }
+            cout << "Ghi file thanh cong !\n";
+        } catch (exception e){
+            cout << e.what() << endl;
+            cout << "Loi ghi file !\n";
+        }
+    }
+    writefile.close();
+    writefile.clear();
+}
 int main(){
     List Q;
     init(Q);
@@ -634,9 +738,15 @@ int main(){
         cout << "4. Xoa hoa don bang ma hoa don nhap vao !\n";
         cout << "5. Chinh sua thong tin cua cac hoa don (Chon de biet them chi tiet !)\n";
         cout << "6. Sap xep danh sach hoa don theo ma hoa don !\n";
-        cout << "7. Them cac hoa don duoc doc tu  file Input_DSHD.txt !\n";
-        cout << "8. Viet danh sach cac hoa don ra file Output_DSHD.txt !\n";
-        cout << "10. Xoa man hinh !\n";
+        cout << "7. Sap xep danh sach hoa don theo ngay lap hoa don !\n";
+        cout << "8. Sap xep danh sach hoa don theo ten khach hang !\n";  
+        cout << "9. Sap xep danh sach hoa don theo so tien thanh toan !\n";
+        cout << "10. Them cac hoa don duoc doc tu  file Input_DSHD.txt !\n";
+        cout << "11. Viet danh sach cac hoa don ra file Output_DSHD.txt !\n";
+        cout << "12. Viet danh sach khach hang vao file Output_KhachHang.txt !\n";
+        cout << "13. Viet danh sach nhan vien vao file Output_NhanVien.txt !\n";
+        cout << "14. Viet danh sach phong vao file Output_Phong.txt !\n";
+        cout << "15. Viet danh sach dich vu vao file Output_DichVu.txt !\n";
         cout << "0. Thoat chuong trinh !\n";
         cout << "Moi ban chon:"; cin >> chon;
         switch (chon){
@@ -659,14 +769,35 @@ int main(){
                 sapXep_DSHD_MaHD(Q);
                 break;
             case 7:
-                readFile_AddHD(Q);
+                sapXep_DSHD_NgayLapHD(Q);
                 break;
             case 8:
+                sapXep_DSHD_TenKH(Q);
+                break;
+            case 9:
+                sapXep_DSHD_TongTien(Q);
+                break;
+            case 10:
+                readFile_AddHD(Q);
+                break;
+            case 11:
                 writeFile_DSHD(Q);
+                break;
+            case 12:
+                writeFile_DSKhachHang(Q);
+                break;
+            case 13:
+                writeFile_DSNhanVien(Q);
+                break;
+            case 14:
+                writeFile_DSPhong(Q);
+                break;
+            case 15:
+                writeFile_DSDichVu(Q);
                 break;
             default:
                 cout << "Ban chon sai roi moi ban chon lai !\n";
         }
-    } while (chon>=1 && chon<=9);
+    } while (chon>=1 && chon<=15);
     return 0;
 }

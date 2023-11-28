@@ -1,0 +1,26 @@
+Danh sach nhan vien hien co la: 
+-----------------------------------------------------------------------------------
+Ma nhan vien      :NV001      Ten nhan vien:Nguyen Thanh Ha
+Dia chi           :25 Dai Co Viet, Ha Noi So dien thoai:0925337447
+CCCD              :22AASDC10001                 Chuc vu :Nhan Vien
+He so luong       :2.3
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+Ma nhan vien      :NV002      Ten nhan vien:Nguyen Thanh Hang
+Dia chi           :25 Dai Co Viet, Ha Noi So dien thoai:0925337447
+CCCD              :22AASDC10023                 Chuc vu :Nhan Vien
+He so luong       :2.3
+-----------------------------------------------------------------------------------
+Danh sach nhan vien hien co la: 
+-----------------------------------------------------------------------------------
+Ma nhan vien      :NV001      Ten nhan vien:Nguyen Thanh Ha
+Dia chi           :25 Dai Co Viet, Ha Noi So dien thoai:0925337447
+CCCD              :22AASDC10001                 Chuc vu :Nhan Vien
+He so luong       :2.3
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+Ma nhan vien      :NV002      Ten nhan vien:Nguyen Thanh Hang
+Dia chi           :25 Dai Co Viet, Ha Noi So dien thoai:0925337447
+CCCD              :22AASDC10023                 Chuc vu :Nhan Vien
+He so luong       :2.3
+-----------------------------------------------------------------------------------
