@@ -1,4 +1,4 @@
-HD001
+HD009
 12-10-2023
 KH0001
 Nguyen Khac Chinh
@@ -21,10 +21,10 @@ Nhan Vien
 1
 DV001
 Matxa
-200000
+50000
 22-03-2023
 
-HD002 
+HD001
 12-10-2023
 KH0002
 Pham Quang Dai
@@ -47,6 +47,58 @@ Nhan Vien
 1
 DV001
 Matxa
-200000
+1200000
 22-05-2023
+
+HD003
+12-10-2023
+KH0001
+Vu Van Phuc
+23 Ba Dinh, Ha Noi
+033434349
+20-08-2023
+31-10-2023
+1
+PH002
+A001
+Day nha A2
+Con trong, du tien nghi
+NV004
+Nguyen Thanh Ha
+25 Dai Co Viet, Ha Noi
+0925337497
+22AASDC10001
+Quan Ly
+4.5
+1
+DV001
+Matxa
+50000
+22-03-2023
+
+HD005
+12-9-2023
+KH0001
+Dang Hoang Nam
+45 Thanh Xuan, Ha Noi
+031434349
+21-01-2022
+31-10-2023
+1
+PH002
+A003
+Day nha A1
+Con trong, du tien nghi
+NV004
+Nguyen Thanh Ha
+25 Dai Co Viet, Ha Noi
+0925337497
+22AASDC10001
+Nhan Vien
+2.3
+1
+DV001
+Matxa
+22000
+21-03-2023
 ENDFILE

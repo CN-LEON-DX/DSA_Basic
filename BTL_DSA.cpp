@@ -34,8 +34,7 @@ struct HoaDon_DV{
     struct NhanVien nv;
     vector<DichVu> dv;
 };
-// Các thao tác vói xóa, tìm ki?m, x?p x?p thì theo List
-// ? dây ta dùng LinkedList 2 chi?u d? thao tác ! 
+ 
 struct Node{
     struct HoaDon_DV hd;
     Node* next;
@@ -135,13 +134,14 @@ float tongTien_DV(vector<DichVu> dv){
 // KHÁCH HÀNG
 void nhapKhachHang(List Q, KhachHang& kh){
     do{
-        cout << "Nhap ten khach hang :"; cin >> kh.sTenKH;
+        cout << "Nhap ten khach hang: "; cin >> kh.sTenKH;
     } while(checkExists_KH(Q, kh.sTenKH) || kh.sTenKH == "");
-    cout << "Nhap ma khach hang :"; cin >> kh.sMaKH;
-    cout << "Nhap dia chi khach hang :"; cin >> kh.sDiaChi;
-    cout << "Nhap so dien thoai khach hang: "; cin >> kh.sSoDT;
-    cout << "Nhap ngay den:"; cin >> kh.sNgayDen;
-    cout << "Nhap ngay di:"; cin >> kh.sNgayDi;
+    cout << "Nhap ma khach hang: "; cin >> kh.sMaKH;
+    cin.ignore();
+    cout << "Nhap dia chi khach hang: "; getline(cin, kh.sDiaChi);
+    cout << "Nhap so dien thoai khach hang: "; getline(cin, kh.sSoDT);
+    cout << "Nhap ngay den: "; cin >> kh.sNgayDen;
+    cout << "Nhap ngay di: "; cin >> kh.sNgayDi;
 }
 void hienKhachHang(KhachHang kh){
     cout << "Ma khach hang: " << kh.sMaKH << endl;
@@ -153,8 +153,9 @@ void hienKhachHang(KhachHang kh){
 }
 void suaThongTinKH_Ten(KhachHang &kh){
     string name="";
+    cin.ignore(1);
     do {
-        cout << "Nhap ten de doi: "; cin >> name;
+        cout << "Nhap ten de doi: "; getline(cin, name);
     }while (name == "");
     kh.sTenKH = name;
     cout << "Doi ten thanh cong !\n";
@@ -387,7 +388,7 @@ void chinhSuaThongTin_HoaDon(List &Q){
                         break;
                     }
                     case 5:{
-                        cout << "Nhap vao ngay lap hoa don moi:"; cin >> p->hd.sNgayLapHD;
+                        cout << "Nhap vao ngay lap hoa don moi:"; getline(cin, p->hd.sNgayLapHD);
                         cout << "Cap nhat thanh cong !\n";
                         break;
                     }
@@ -440,24 +441,67 @@ void DeleteNode(Node* p, List &Q){
         p->prev -> next = p->next;
         p->next -> prev = p->prev;
     }
-    free(p);
+    delete p;
 }
 // Xoa mot hoa don ra khoi danh sach dua vao ma hoa don
-void XoaHD_MaHD(List &Q){
-    string maHD;
-    cout << "Nhap vao ma hoa don can xoa:"; cin >> maHD;
-    bool check_found = false;
-    for (auto p = Q.head;p!=NULL;p = p->next){
-        if (p->hd.sMaHD==maHD){
-            check_found = true;
-            DeleteNode(p, Q);
-            cout << "Hoa don ma " << p->hd.sMaHD << " da duoc xoa!" << endl;
-            break;
+void XoaHD_MaHD(List &Q) {
+    string sMaHD;
+    cout << "Nhap vao ma hoa don can xoa: ";
+    cin.ignore();
+    getline(cin, sMaHD);
+
+    Node* prev = NULL;
+    Node* curr = Q.head;
+
+    while (curr != NULL) {
+        if (curr->hd.sMaHD == sMaHD) {
+            if (prev == NULL) {
+                Q.head = curr->next;
+            } else {
+                prev->next = curr->next;
+            }
+            delete curr;
+            cout << "Xoa hoa don thanh cong!\n";
+            return;
         }
+        prev = curr;
+        curr = curr->next;
     }
-    if (check_found == false){
-        cout << "Khong tim thay hoa don cua ban dinh xoa!" << endl;
+
+    cout << "Khong tim thay hoa don voi ma hoa don " << sMaHD << "!\n";
+}
+// Hoán đổi node
+void swapNodes(Node* node1, Node* node2, List &Q) {
+    if (node1 == node2) {
+        return;
     }
+    Node* prevNode1 = NULL;
+    Node* prevNode2 = NULL;
+    Node* currentNode = Q.head;
+    while (currentNode != NULL) {
+        if (currentNode->next == node1) {
+            prevNode1 = currentNode;
+        }
+        if (currentNode->next == node2) {
+            prevNode2 = currentNode;
+        }
+        currentNode = currentNode->next;
+    }
+
+    if (prevNode1 != NULL) {
+        prevNode1->next = node2;
+    } else {
+        Q.head = node2;
+    }
+    if (prevNode2 != NULL) {
+        prevNode2->next = node1;
+    } else {
+        Q.head = node1;
+    }
+
+    Node* temp = node1->next;
+    node1->next = node2->next;
+    node2->next = temp;
 }
 
 // Tim kiem hoa don theo ma hoa don !
@@ -477,7 +521,8 @@ void TimHD_maHD(List Q){
 }
 void TimHD_TenKH(List Q){
     string sTenKH;
-    cout << "Nhap vao ten khach hang can tim kiem:"; cin >> sTenKH;
+    cin.ignore(1);
+    cout << "Nhap vao ten khach hang can tim kiem:"; getline(cin, sTenKH);
     bool check_found = false;
     for (auto p = Q.head;p!=NULL;p = p->next){
         if (p->hd.kh.sTenKH == sTenKH){
@@ -490,43 +535,77 @@ void TimHD_TenKH(List Q){
     if (!check_found) cout << "Khong tim thay hoa don \n";
 }
 
+
+
 void sapXep_DSHD_MaHD(List &Q){
+    cout << "Danh sach ma hoa don luc dau la: \n";
+    for (auto p = Q.head;p!=NULL;p = p->next){
+        cout << p->hd.sMaHD << endl;
+    }
     for (auto i = Q.head;i!= Q.tail;i = i->next){
         for (auto j=i->next;j!=NULL;j = j->next){
             if (i->hd.sMaHD > j->hd.sMaHD){
-                swap(i->hd, j->hd);
+                swapNodes(i, j, Q);
             }
         }
+    }
+    cout << "Danh sach ma hoa don sau khi sap xep la: \n";
+    for (auto p = Q.head;p!=NULL;p = p->next){
+        cout << p->hd.sMaHD << endl;
     }
     cout << "Danh sach da xap xep thanh cong !\n";
 }
 void sapXep_DSHD_NgayLapHD(List &Q){
+    cout << "Cac ngay lap luc dau la: \n";
+    for (auto p = Q.head;p!=NULL;p = p->next){
+        cout << p->hd.sNgayLapHD << endl;
+    }
     for (auto i = Q.head;i!= Q.tail;i = i->next){
         for (auto j=i->next;j!=NULL;j = j->next){
             if (i->hd.sNgayLapHD > j->hd.sNgayLapHD){
-                swap(i->hd, j->hd);
+               swapNodes(i, j, Q);
             }
         }
+    }
+    cout << "Cac ngay lap sau khi sap xep la: \n";
+    for (auto p = Q.head;p!=NULL;p = p->next){
+        cout << p->hd.sNgayLapHD << endl;
     }
     cout << "Danh sach da xap xep thanh cong !\n";
 }
 void sapXep_DSHD_TenKH(List &Q){
+    cout << "Danh sach ten khach hang luc dau la: \n";
+    for (auto p = Q.head;p!=NULL;p = p->next){
+        cout << p->hd.kh.sTenKH << endl;
+    }
     for (auto i = Q.head;i!= Q.tail;i = i->next){
         for (auto j=i->next;j!=NULL;j = j->next){
             if (i->hd.kh.sTenKH > j->hd.kh.sTenKH){
-                swap(i->hd, j->hd);
+                swapNodes(i, j, Q);
             }
         }
+    }
+    cout << "Danh sach ten khach hang sau khi sap xep la: \n";
+    for (auto p = Q.head;p!=NULL;p = p->next){
+        cout << p->hd.kh.sTenKH << endl;
     }
     cout << "Danh sach da xap xep thanh cong !\n";
 }
 void sapXep_DSHD_TongTien(List &Q){
+    cout << "Danh sach tong tien luc dau la: \n";
+    for (auto p = Q.head;p!=NULL;p = p->next){
+        cout << fixed << tongTien_DV(p->hd.dv) << endl;
+    }
     for (auto i = Q.head;i!= Q.tail;i = i->next){
         for (auto j=i->next;j!=NULL;j = j->next){
             if (tongTien_DV(i->hd.dv) > tongTien_DV(j->hd.dv)){
-                swap(i->hd, j->hd);
+                swapNodes(i, j, Q);
             }
         }
+    }
+    cout << "Danh sach tong tien sau khi sap xep la: \n";
+    for (auto p = Q.head;p!=NULL;p = p->next){
+        cout << fixed <<  tongTien_DV(p->hd.dv) << endl;
     }
     cout << "Danh sach da xap xep thanh cong !\n";
 }
@@ -594,11 +673,11 @@ void timHD_SoNgayLuutru_Min(List Q){
 
 // TInh tong thanh toan  
 void tinhtongThanhToan_HD(List Q){
-    float tongThanhToan = 0;
+    double tongThanhToan = 0;
     for (auto p = Q.head;p!=NULL;p = p->next){
         tongThanhToan += tongTien_DV(p->hd.dv);
     }
-    cout << "Tong thanh toan cua tat ca cac hoa don la: " << tongThanhToan << endl;
+    cout << "Tong thanh toan cua tat ca cac hoa don la: " << fixed << tongThanhToan << endl;
 }   
 void trungbinhThanhToan_HD(List Q){
     float tongThanhToan = 0;
@@ -630,7 +709,8 @@ void thongKe_SoLuongHD_TheoThang(List Q){
 }
 void thongKe_SoLuongNV_TheoChucVu(List Q){
     string sChucVu;
-    cout << "Nhap vao chuc vu can thong ke:"; cin >> sChucVu;
+    cin.ignore(1);
+    cout << "Nhap vao chuc vu can thong ke:"; getline(cin, sChucVu);
     int cnt = 0;
     for (auto p = Q.head;p!=NULL;p = p->next){
         if (p->hd.nv.sChucVu == sChucVu){
@@ -641,30 +721,32 @@ void thongKe_SoLuongNV_TheoChucVu(List Q){
 }
 void thongKe_SoLuongKH_TheoThang(List Q){
     int thang;
-    cout << "Nhap vao thang can thong ke:"; cin >> thang;
+    cout << "Nhap vao thang can thong ke: ";
+    cin >> thang;
     int cnt = 0;
-    for (auto p = Q.head;p!=NULL;p = p->next){
-        if (stoi(p->hd.kh.sNgayDen.substr(3,2)) == thang){
+    for (auto p = Q.head; p != NULL; p = p->next){
+        string tmp = p->hd.kh.sNgayDen;
+        int month = stoi(tmp.substr(3,2));
+        if (month == thang){
             cnt++;
         }
     }
     cout << "So luong khach hang den trong thang " << thang << " la: " << cnt << endl;
 }
-void thongKe_SoLuongPH_TheoLoaiPhong(List Q) {
-    string loaiPhong;
-    cout << "Nhap vao loai phong can thong ke: ";
-    cin >> loaiPhong;
-    
-    int count = 0;
-    for (auto p = Q.head; p != NULL; p = p->next) {
-        for (Phong ph : p->hd.ph) {
-            if (ph.sTenPhong == loaiPhong) {
-                count++;
+void thongKe_SoLuongPH_TheoDayNha(List Q){
+    string sDayNha;
+    cin.ignore(1);
+    cout << "Nhap vao day nha can thong ke: ";
+    getline(cin, sDayNha);
+    int cnt = 0;
+    for (auto p = Q.head; p != NULL; p = p->next){
+        for (Phong ph : p->hd.ph){
+            if (ph.sDayPhong == sDayNha){
+                cnt++;
             }
         }
     }
-    
-    cout << "So luong phong co loai " << loaiPhong << " la: " << count << endl;
+    cout << "So luong phong trong day nha " << sDayNha << " la: " << cnt << endl;
 }
 
 // Doc file DSHD.txt de nhan vao cac thong tin cua danh sach !
@@ -721,10 +803,23 @@ void readFile_AddHD(List &Q){
                     hd.dv.push_back(dv);
                 }
                 Node *p = Get_Node(hd);
-                if (p!=NULL){
-                    AddLast(Q, p);
-                    cout << "Them vao tu file thanh cong !\n";
-                }else cout << "Error!\n";
+                if (p != NULL) {
+                    bool duplicate = false;
+                    for (auto node = Q.head; node != NULL; node = node->next) {
+                        if (node->hd.sMaHD == hd.sMaHD) {
+                            duplicate = true;
+                            break;
+                        }
+                    }
+                    if (!duplicate) {
+                        AddLast(Q, p);
+                        cout << "Them vao tu file thanh cong !\n";
+                    } else {
+                        cout << "Hoa don da ton tai, bo qua hoa don nay!\n";
+                    }
+                } else {
+                    cout << "Error!\n";
+                }
             }
         } catch(exception e){
             cout << e.what() << endl;
@@ -797,7 +892,7 @@ int main(){
         cout << "18. Thống kê số lượng hóa đơn theo từng tháng !\n";
         cout << "19. Thống kê số lương nhân viên theo từng chức vụ !\n";
         cout << "20. Thống kê số lượng khách hàng theo từng tháng !\n";
-        cout << "21. Thống kê số lượng phòng theo từng loại phòng !\n";
+        cout << "21. Thống kê số lượng phòng theo từng dãy phòng !\n";
         cout << "22. Them cac hoa don duoc doc tu  file Input_DSHD.txt !\n";
         cout << "23. Viet danh sach cac hoa don ra file Output_DSHD.txt !\n";
         cout << "0. Thoat chuong trinh !\n";
@@ -864,7 +959,7 @@ int main(){
                 thongKe_SoLuongKH_TheoThang(Q);
                 break;
             case 21:
-                thongKe_SoLuongPH_TheoLoaiPhong(Q);
+                thongKe_SoLuongPH_TheoDayNha(Q);
                 break; 
             case 22:
                 readFile_AddHD(Q);
