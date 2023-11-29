@@ -1,5 +1,5 @@
 HD009
-12-10-2023
+12-01-2023
 KH0001
 Nguyen Khac Chinh
 245 Dinh Cong, Ha Noi
@@ -21,11 +21,11 @@ Nhan Vien
 1
 DV001
 Matxa
-50000
+500000
 22-03-2023
 
 HD001
-12-10-2023
+16-07-2023
 KH0002
 Pham Quang Dai
 245 Ba Dinh, Ha Noi

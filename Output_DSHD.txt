@@ -1,6 +1,6 @@
 Danh sach hoa don hien co la: 
                      HOA DON THANH TOAN DICH VU           
-         Ngày 12-10-2023              Mã hóa đơn: HD0019
+         Ngày 12-01-2023              Mã hóa đơn: HD009
 -----------------------------------------------------------------------------------
 Ten               :Nguyen Khac Chinh           Ngay den:20-08-2023
 Dia chi           :245 Dinh Cong, Ha Noi       Ngay di:11-10-2023
@@ -9,22 +9,21 @@ Ma so thue        :VCB2023                     Thu ngan: Quan tri
 Phong             :H001                        Thanh toan: Chua thanh toan 
 -----------------------------------------------------------------------------------
 Ngay                    Chi Tiet            So tien 
-2-03-2023               Matxa             200000
-Tong thanh toan: 200000
+2-03-2023               Matxa             500000
+Tong thanh toan: 500000
 -----------------------------------------------------------------------------------
                      HOA DON THANH TOAN DICH VU           
-         Ngày 12-10-2023              Mã hóa đơn: HD011 
+         Ngày 16-07-2023              Mã hóa đơn: HD001
 -----------------------------------------------------------------------------------
 Ten               :Pham Quang Dai           Ngay den:21-07-2023
 Dia chi           :245 Ba Dinh, Ha Noi       Ngay di:11-10-2023
 So dien thoai     :0943495642                  So dem :80
 Ma so thue        :VCB2023                     Thu ngan: Quan tri
-Phong             :H001                        Thanh toan: Chua thanh toan 
+Phong             :H002                        Thanh toan: Chua thanh toan 
 -----------------------------------------------------------------------------------
 Ngay                    Chi Tiet            So tien 
-2-03-2023               Matxa             200000
-2-05-2023               Matxa             200000
-Tong thanh toan: 400000
+2-05-2023               Matxa           1.2e+006
+Tong thanh toan: 1.2e+006
 -----------------------------------------------------------------------------------
                      HOA DON THANH TOAN DICH VU           
          Ngày 12-10-2023              Mã hóa đơn: HD003
@@ -33,13 +32,11 @@ Ten               :Vu Van Phuc           Ngay den:20-08-2023
 Dia chi           :23 Ba Dinh, Ha Noi       Ngay di:31-10-2023
 So dien thoai     :033434349                  So dem :71
 Ma so thue        :VCB2023                     Thu ngan: Quan tri
-Phong             :H001                        Thanh toan: Chua thanh toan 
+Phong             :H002                        Thanh toan: Chua thanh toan 
 -----------------------------------------------------------------------------------
 Ngay                    Chi Tiet            So tien 
-2-03-2023               Matxa             200000
-2-05-2023               Matxa             200000
-2-03-2023               Matxa             200000
-Tong thanh toan: 600000
+2-03-2023               Matxa              50000
+Tong thanh toan: 50000
 -----------------------------------------------------------------------------------
                      HOA DON THANH TOAN DICH VU           
          Ngày 12-9-2023              Mã hóa đơn: HD005
@@ -48,12 +45,9 @@ Ten               :Dang Hoang Nam           Ngay den:21-01-2022
 Dia chi           :45 Thanh Xuan, Ha Noi       Ngay di:31-10-2023
 So dien thoai     :031434349                  So dem :645
 Ma so thue        :VCB2023                     Thu ngan: Quan tri
-Phong             :H001                        Thanh toan: Chua thanh toan 
+Phong             :H002                        Thanh toan: Chua thanh toan 
 -----------------------------------------------------------------------------------
 Ngay                    Chi Tiet            So tien 
-2-03-2023               Matxa             200000
-2-05-2023               Matxa             200000
-2-03-2023               Matxa             200000
-1-03-2023               Matxa             200000
-Tong thanh toan: 800000
+1-03-2023               Matxa              22000
+Tong thanh toan: 22000
 -----------------------------------------------------------------------------------

@@ -470,39 +470,9 @@ void XoaHD_MaHD(List &Q) {
 
     cout << "Khong tim thay hoa don voi ma hoa don " << sMaHD << "!\n";
 }
-// Hoán đổi node
-void swapNodes(Node* node1, Node* node2, List &Q) {
-    if (node1 == node2) {
-        return;
-    }
-    Node* prevNode1 = NULL;
-    Node* prevNode2 = NULL;
-    Node* currentNode = Q.head;
-    while (currentNode != NULL) {
-        if (currentNode->next == node1) {
-            prevNode1 = currentNode;
-        }
-        if (currentNode->next == node2) {
-            prevNode2 = currentNode;
-        }
-        currentNode = currentNode->next;
-    }
+// Hoán đổi node của danh sách 2 chiều
 
-    if (prevNode1 != NULL) {
-        prevNode1->next = node2;
-    } else {
-        Q.head = node2;
-    }
-    if (prevNode2 != NULL) {
-        prevNode2->next = node1;
-    } else {
-        Q.head = node1;
-    }
 
-    Node* temp = node1->next;
-    node1->next = node2->next;
-    node2->next = temp;
-}
 
 // Tim kiem hoa don theo ma hoa don !
 void TimHD_maHD(List Q){
@@ -536,7 +506,6 @@ void TimHD_TenKH(List Q){
 }
 
 
-
 void sapXep_DSHD_MaHD(List &Q){
     cout << "Danh sach ma hoa don luc dau la: \n";
     for (auto p = Q.head;p!=NULL;p = p->next){
@@ -545,7 +514,7 @@ void sapXep_DSHD_MaHD(List &Q){
     for (auto i = Q.head;i!= Q.tail;i = i->next){
         for (auto j=i->next;j!=NULL;j = j->next){
             if (i->hd.sMaHD > j->hd.sMaHD){
-                swapNodes(i, j, Q);
+                swap(i->hd.sMaHD, j->hd.sMaHD);
             }
         }
     }
@@ -563,7 +532,7 @@ void sapXep_DSHD_NgayLapHD(List &Q){
     for (auto i = Q.head;i!= Q.tail;i = i->next){
         for (auto j=i->next;j!=NULL;j = j->next){
             if (i->hd.sNgayLapHD > j->hd.sNgayLapHD){
-               swapNodes(i, j, Q);
+               swap(i->hd.sNgayLapHD, j->hd.sNgayLapHD);
             }
         }
     }
@@ -581,7 +550,7 @@ void sapXep_DSHD_TenKH(List &Q){
     for (auto i = Q.head;i!= Q.tail;i = i->next){
         for (auto j=i->next;j!=NULL;j = j->next){
             if (i->hd.kh.sTenKH > j->hd.kh.sTenKH){
-                swapNodes(i, j, Q);
+                 swap(i->hd.kh.sTenKH, j->hd.kh.sTenKH);
             }
         }
     }
@@ -591,6 +560,8 @@ void sapXep_DSHD_TenKH(List &Q){
     }
     cout << "Danh sach da xap xep thanh cong !\n";
 }
+// Tinh tong tien tung hoa don 1 cach rieng le
+
 void sapXep_DSHD_TongTien(List &Q){
     cout << "Danh sach tong tien luc dau la: \n";
     for (auto p = Q.head;p!=NULL;p = p->next){
@@ -599,7 +570,7 @@ void sapXep_DSHD_TongTien(List &Q){
     for (auto i = Q.head;i!= Q.tail;i = i->next){
         for (auto j=i->next;j!=NULL;j = j->next){
             if (tongTien_DV(i->hd.dv) > tongTien_DV(j->hd.dv)){
-                swapNodes(i, j, Q);
+                swap(i->hd.dv, j->hd.dv);
             }
         }
     }
@@ -759,8 +730,8 @@ void readFile_AddHD(List &Q){
         return;
     }else {
         try {
-            HoaDon_DV hd;
             while (!readfile.eof()){
+                HoaDon_DV hd;
                 do {
                     getline(readfile, hd.sMaHD);
                     if (hd.sMaHD == "ENDFILE") return;
@@ -791,6 +762,7 @@ void readFile_AddHD(List &Q){
                 getline(readfile, hd.nv.sChucVu);
                 readfile >> hd.nv.fHSL;
                 int soDV;
+                cout << soDV << endl;
                 readfile >> soDV;
                 readfile >> xu_ly_troi_lenh;
                 for (int i=1;i<=soDV;i++){
@@ -808,7 +780,7 @@ void readFile_AddHD(List &Q){
                     for (auto node = Q.head; node != NULL; node = node->next) {
                         if (node->hd.sMaHD == hd.sMaHD) {
                             duplicate = true;
-                            break;
+                            return;
                         }
                     }
                     if (!duplicate) {
@@ -832,7 +804,7 @@ void readFile_AddHD(List &Q){
 // In danh sach cac hoa don theo file danh sach !
 void writeFile_DSHD(List Q){
     ofstream writefile;
-    writefile.open("D:/DSA2023-1/BTL/Output_DSHD.txt", ios::out | ios::app | ios::binary);
+    writefile.open("D:/DSA2023-1/BTL/Output_DSHD.txt", ios::out | ios::app);
     if (writefile.fail()){
         cout << "Khong the mo file !\n";
         return;
@@ -840,7 +812,7 @@ void writeFile_DSHD(List Q){
         try{
             cout<<"Bat dau ghi file !\n";
             writefile << "Danh sach hoa don hien co la: \n";
-            for (auto p = Q.head;p!=NULL;p = p->next){
+            for (Node* p = Q.head;p!=NULL;p = p->next){
                 writefile << setw(20) << "                     HOA DON THANH TOAN DICH VU           " << endl;
                 writefile << setw(15) << "Ngày " << p->hd.sNgayLapHD << setw(30) << "Mã hóa đơn: " << p->hd.sMaHD << endl;
                 writefile << "-----------------------------------------------------------------------------------\n";
@@ -852,9 +824,9 @@ void writeFile_DSHD(List Q){
                 writefile << "-----------------------------------------------------------------------------------\n";
                 writefile << setw(10) << "Ngay              " <<setw(15) << "Chi Tiet " << setw(19) << "So tien " << endl;  
                 for (DichVu x : p->hd.dv){
-                    writefile << setw(8) << x.sNgaySDDV << setw(20) << x.sTenDV << setw(19) << x.fGiaDV << endl;
+                    writefile << setw(8) << x.sNgaySDDV << setw(20) << x.sTenDV << setw(19) << fixed << setprecision(2) << x.fGiaDV << endl;
                 }
-                writefile << "Tong thanh toan: " << tongTien_DV(p->hd.dv) << endl;
+                writefile << "Tong thanh toan: " << fixed << setprecision(2) << tongTien_DV(p->hd.dv) << endl;
                 writefile << "-----------------------------------------------------------------------------------\n";
             }
             cout << "Ghi file thanh cong !\n";
